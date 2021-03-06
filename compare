@@ -1,0 +1,39 @@
+#include<stdio.h>
+#include<assert.h>
+int main()
+{
+    int l = 0, m = 0, i = 0, j = 0, count = 0;
+    int* arr1 = NULL,* arr2 = NULL;
+    scanf("%d%d", &l, &m);
+    arr1 = (int*)__vcrt_malloc_normal(sizeof(int) * m);
+    arr2 = (int*)__vcrt_malloc_normal(sizeof(int) * m);
+    for (i = 0; i < m; i++)
+    {
+        scanf("%d%d", &arr1[i], &arr2[i]);
+        assert(arr1[i] <= arr2[i]);
+    }
+    for (i = 0; i < m - 1; i++) {
+        for (j = i + 1; j < m; j++) {
+            if (arr1[i] == 10001 || arr2[j] == 10001)continue;
+            if (arr1[i] >= arr1[j] && arr2[i] <= arr2[j])
+                arr1[i] = 10001;//添加标识
+            else if (arr1[i] <= arr1[j] && arr2[i] >= arr1[j] && arr2[i] <= arr2[j]) {
+                arr1[j] = arr1[i];
+                arr1[i] = 10001;
+            }
+            else if (arr1[i] <= arr1[j] && arr2[i] >= arr2[j])
+                arr1[j] = 10001;
+            else if (arr2[i] >= arr2[j] && arr1[i] <= arr2[j] && arr1[i] >= arr1[j]) {
+                arr1[i] = arr1[j];
+                arr1[j] = 10001;
+            }
+        }
+    }
+    for (i = 0; i < m; i++) {
+        if (arr1[i] != 10001) {
+            count += (arr2[i] - arr1[i] + 1);
+        }
+    }
+    printf("%d", l + 1 - count);
+    return 0;
+}
