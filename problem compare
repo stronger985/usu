@@ -1,39 +1,43 @@
 #include<stdio.h>
-#include<assert.h>
+int max(int x, int y)
+{
+    return (x > y ? x : y);
+}
 int main()
 {
-    int l = 0, m = 0, i = 0, j = 0, count = 0;
-    int* arr1 = NULL,* arr2 = NULL;
-    scanf("%d%d", &l, &m);
-    arr1 = (int*)__vcrt_malloc_normal(sizeof(int) * m);
-    arr2 = (int*)__vcrt_malloc_normal(sizeof(int) * m);
-    for (i = 0; i < m; i++)
+    int sum = 0, i = 0, j = 0;
+    int* arr1, * arr2, * arr3, * result;
+    scanf("%d", &sum);
+    arr1 = (int*)calloc(sum, 4);
+    arr2 = (int*)calloc(sum, 4);
+    arr3 = (int*)calloc(sum, 4);
+    result = (int*)calloc(sum, 4);
+    for (i = 0; i < sum; i++)
     {
-        scanf("%d%d", &arr1[i], &arr2[i]);
-        assert(arr1[i] <= arr2[i]);
+        scanf("%d%d%d", &arr1[i], &arr2[i], &arr3[i]);
     }
-    for (i = 0; i < m - 1; i++) {
-        for (j = i + 1; j < m; j++) {
-            if (arr1[i] == 10001 || arr2[j] == 10001)continue;
-            if (arr1[i] >= arr1[j] && arr2[i] <= arr2[j])
-                arr1[i] = 10001;//添加标识
-            else if (arr1[i] <= arr1[j] && arr2[i] >= arr1[j] && arr2[i] <= arr2[j]) {
-                arr1[j] = arr1[i];
-                arr1[i] = 10001;
+    for (i = 0; i < sum; i++)
+    {
+        if (arr1[i] == arr2[i] || arr1[i] == arr3[i] || arr2[i] == arr3[i])
+            if (arr1[i] == arr2[i] && arr1[i] == arr3[i])
+                result[i] = arr1[i];
+            else
+                result[i] = max(max(arr1[i], arr2[i]), arr3[i]);
+        else {
+            if (arr1[i] > arr2[i]) {
+                j = arr1[i]; arr1[i] = arr2[i]; arr2[i] = j;
             }
-            else if (arr1[i] <= arr1[j] && arr2[i] >= arr2[j])
-                arr1[j] = 10001;
-            else if (arr2[i] >= arr2[j] && arr1[i] <= arr2[j] && arr1[i] >= arr1[j]) {
-                arr1[i] = arr1[j];
-                arr1[j] = 10001;
+            if (arr1[i] > arr3[i]) {
+                j = arr1[i]; arr1[i] = arr3[i]; arr3[i] = j;
             }
+            if (arr2[i] > arr3[i]) {
+                j = arr2[i]; arr2[i] = arr3[i]; arr3[i] = j;
+            }
+            result[i] = arr2[i];
         }
     }
-    for (i = 0; i < m; i++) {
-        if (arr1[i] != 10001) {
-            count += (arr2[i] - arr1[i] + 1);
-        }
+    for (i = 0; i < sum; i++) {
+        printf("%d\n", result[i]);
     }
-    printf("%d", l + 1 - count);
     return 0;
 }
