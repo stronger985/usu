@@ -1,0 +1,42 @@
+#include<stdio.h>
+int mini(int x, int y)
+{
+	if (x < 0)x = -x;
+	if (y < 0)y = -y;
+	int min = x > y ? y : x;
+	int max = x > y ? x : y;
+	if (max % min == 0)return min;
+	else return mini(min, max % min);
+}
+int main()
+{
+	int n,zi = 0,mu = 0,min = 0;
+	scanf("%d", &n);
+	while (n--){
+		int arr[5];
+		//int arr[4];
+			scanf("%d %d %d %d %c", &arr[0], &arr[1], &arr[2], &arr[3], &arr[4]);
+		
+		/*for (int i = 0; i < 4; i++) {
+			arr[i] = arr1[i];
+		}*/
+		switch ((char)arr[4]) {
+		case'+':
+			zi = arr[0] * arr[3] + arr[1] * arr[2]; mu = arr[1] * arr[3]; break;
+		case'-':
+			zi = arr[0] * arr[3] - arr[1] * arr[2]; mu = arr[1] * arr[3]; break;
+		case'*':
+			zi = arr[0] * arr[2]; mu = arr[1] * arr[3]; break;
+		case'/':
+			zi = arr[0] * arr[3]; mu = arr[1] * arr[2]; break;
+		}
+		if (mu < 0) {
+			zi = -zi; mu = -mu;
+		}
+		if (zi % mu == 0) printf("%d/%d%c%d/%d=%d\n", arr[0], arr[1], arr[4], arr[2], arr[3], zi / mu);
+		else {
+			min = mini(zi, mu);printf("%d/%d%c%d/%d=%d/%d\n", arr[0],arr[1], arr[4],arr[2],arr[3],zi / min, mu / min);
+		}
+	}
+	return 0;
+}
