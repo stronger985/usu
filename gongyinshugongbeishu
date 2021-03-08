@@ -1,0 +1,26 @@
+#include<stdio.h>
+int main()
+{
+	int n, x, y,n1,mini, maxi;
+	scanf("%d", &n);
+	mini = malloc(sizeof(int) * n);
+	maxi = malloc(sizeof(int) * n);
+	n1 = n;
+	while (n--) {
+		scanf("%d %d", &x, &y);
+		int min = x > y ? y : x;
+		int max = x > y ? x : y;
+		for (int i = 1; i <= min; i++) {
+			if (min % i == 0&& max % i == 0) {
+				mini= i;
+			}
+		}
+		for (int i = 1; i <= min; i++) {
+			if ((i * max) % min == 0) {
+				maxi = i * max; break;
+			}
+		}
+		printf("%d %d\n", mini, maxi);
+	}
+	return 0;
+}
