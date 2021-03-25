@@ -1,0 +1,42 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+	int n;
+	scanf("%d", &n);
+	while (n--) {
+		int a = 0, c = 1, ans[100] = { -1 }, count = 0,j1 = 0,j2 = 0;
+		char b, input[21] = { 0 }, arr[100][200] = { 1 };
+		scanf("%d", &a);
+		getchar();
+		scanf("%s", input);
+		getchar();
+		for (int i = 0; i < a; i++) {
+			scanf("%[^\n]", arr[i]);
+			getchar();
+		}
+		for (int i = 0; i < a; i++) {
+			ans[i] = -1;
+			for (int j = 0; input[0] != arr[i][j] && j < 200; j++)j2 = j;
+			if (input[0] == arr[i][0])ans[i] = 0;
+			else if (j2+1 != 200 && ans[j2] == ' ') 
+				ans[i] = j2+1;
+		}
+		input[strlen(input)] = 1;
+		for (int i = 0; i < a ; i++) {
+			if (ans[i] < 0)continue;
+			for (int j = 0; j < 20; j++) {
+				
+				if ((ans[i] + j) < 200 && input[j] == arr[i][ans[i] + j]) continue;
+				j1 = j;
+				break;
+			}
+				if (input[j1] == 1&& arr[i][ans[i] + strlen(input) == '\0']) count++;
+				else if(input[j1] == 1 && (arr[i][ans[i] + strlen(input)]) == ' ')count++;
+		}
+		if (count)
+			printf("%d\n", count);
+		else printf("Do not find\n");
+	}
+	return 0;
+}
