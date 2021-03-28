@@ -1,0 +1,18 @@
+#include<iostream>
+#include<string>
+
+int main()
+{
+	int i, j, len, arr[10] = { 0 };
+	string s;
+	cin >> s;
+
+	len = s.length();
+	for (i = 0; i < len; i++) {
+		arr[s[i] - '0']++;
+	}
+	for (j = 0; j < 10; j++) {
+		cout << arr[j] << endl;
+	}
+	return 0;
+}
