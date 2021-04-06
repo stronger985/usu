@@ -1,2 +1,2 @@
 # usu
-I jjust do it for myself.
+I just do it for myself.
