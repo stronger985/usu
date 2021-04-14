@@ -1,0 +1,17 @@
+#include<stack>
+
+using namespace std;
+
+int main()
+{
+	char ch;
+	stack <char> s;
+	while ((ch = getchar()) != '#') {
+		s.push(ch);
+	}
+	while (!s.empty()) {
+		putchar(s.top());
+		s.pop();
+	}
+	return 0;
+}
