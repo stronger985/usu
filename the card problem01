@@ -1,0 +1,18 @@
+#include<stdio.h>
+
+#define N 64
+int main()
+{
+	int i, n, front, rear, q[2 * N];
+	scanf_s("%d", &n);
+	front = 0; rear = n;
+	for (i = 0; i < n; i++) {
+		q[i] = i + 1;
+	}
+	while (rear > front) {
+		printf("%d ", q[front]);
+		front++;
+		q[rear++] = q[front++];
+	}
+	return 0;
+}
