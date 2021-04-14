@@ -1,0 +1,25 @@
+#include<stdio.h>
+
+#define N 1000
+
+int main()
+{
+	int n, target[N];
+	while (scanf_s("%d", &n) == 1) {
+		int i = 0;
+		int A = 1, B = 0,top = -1;
+		int stack[N];
+		int ok = 1;
+		for (; i < n; i++) {
+			scanf_s("%d",&target[i]);
+		}
+		while (B < n) {
+			if (A == target[B]) { A++; B++; }
+			else if (top >= 0 && stack[top] == target[B]) { top--; B++; }
+			else if (A <= n) { stack[++top] = A; A++; }
+			else { ok = 0; break; }
+		}
+		printf("%s\n", ok ? "Yes" : "No");
+	}
+	return 0;
+}
