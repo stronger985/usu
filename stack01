@@ -1,0 +1,14 @@
+#include<stdio.h>
+
+int main()
+{
+	char ch, stack[1002];
+	int i = -1;
+	while ((ch = getchar()) != '#') {
+		stack[++i] = ch;
+	}
+	while (i >= 0) {
+		putchar(stack[i--]);
+	}
+	return 0;
+}
