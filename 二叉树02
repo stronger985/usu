@@ -1,0 +1,22 @@
+#include<cstdio>
+using namespace std;
+
+#define MAXD 20
+int state[1 << MAXD];
+int main()
+{
+	int D, I;
+	while (scanf("%d%d",&D,&I) == 2) {
+		int i, k, n = (1 << D) - 1;
+		memset(state, 0, sizeof(state));
+		for (i = 0; i < I; i++) {
+			for (k = 1;;) {
+				state[k] = !state[k];
+				k = state[k] ? (2 * k) : (2 * k + 1);
+				if (k > n)break;
+			}
+		}
+		printf("%d\n", k / 2);
+	}
+	return 0;
+}
